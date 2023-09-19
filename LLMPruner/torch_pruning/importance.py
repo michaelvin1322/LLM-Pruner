@@ -11,7 +11,7 @@ class Importance(abc.ABC):
     """ estimate the importance of a Pruning Group, and return an 1-D per-channel importance score.
     """
     @abc.abstractclassmethod
-    def __call__(self, group)-> torch.Tensor:
+    def __call__(self, group) -> torch.Tensor:
         raise NotImplementedError
 
 class MagnitudeImportance(Importance):
@@ -29,7 +29,7 @@ class MagnitudeImportance(Importance):
             group_imp = group_imp.max(dim=0)[0]
         elif self.group_reduction == "prod":
             group_imp = torch.prod(group_imp, dim=0)
-        elif self.group_reduction=='first':
+        elif self.group_reduction == 'first':
             group_imp = group_imp[0]
         elif self.group_reduction is None:
             group_imp = group_imp
